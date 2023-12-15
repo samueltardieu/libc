@@ -899,12 +899,18 @@ extern "C" {
         longopts: *const option,
         longindex: *mut ::c_int,
     ) -> ::c_int;
+    pub fn strftime(
+        buf: *mut ::c_char,
+        maxsize: ::size_t,
+        format: *const ::c_char,
+        timeptr: *const ::tm,
+    ) -> ::size_t;
 }
 
 cfg_if! {
     if #[cfg(any(target_os = "macos", target_os = "ios", target_os = "tvos", target_os = "watchos"))] {
         mod apple;
-        pub use self::apple::*;
+        pub use self::apple::{*, strftime as _};
     } else if #[cfg(any(target_os = "openbsd", target_os = "netbsd"))] {
         mod netbsdlike;
         pub use self::netbsdlike::*;

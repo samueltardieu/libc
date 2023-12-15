@@ -5604,6 +5604,10 @@ extern "C" {
     pub fn asctime(tm: *const ::tm) -> *mut ::c_char;
     pub fn ctime(clock: *const time_t) -> *mut ::c_char;
     pub fn getdate(datestr: *const ::c_char) -> *mut ::tm;
+    #[deprecated(
+        since = "0.2.152",
+        note = "`strftime` has been moved to the `libc::unix::bsd module`"
+    )]
     pub fn strftime(
         buf: *mut ::c_char,
         maxsize: ::size_t,
